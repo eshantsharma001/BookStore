@@ -4,7 +4,7 @@ const ADMIN_PASSWORD = "1234";
 
 const express = require('express');
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000;
 
 const mongoose = require('mongoose');
 const multer = require('multer');
@@ -38,7 +38,7 @@ const transport = mailUser && mailPassword
     : null;
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/bookstore');
+    await mongoose.connect(process.env.MONGO_URI);
 }
 main()
 .then(() => {console.log('Connected to MongoDB')})
