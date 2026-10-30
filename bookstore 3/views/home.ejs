@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookholic | Your Reading Corner</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/storefront.css">
+</head>
+
+<body class="store-ui bg-[#faf7f0] text-[#29251f]">
+
+    <%- include('includes/nav.ejs') %>
+
+    <% if (authStatus === 'logged-out') { %>
+        <div class="mx-auto mt-5 max-w-6xl px-6">
+            <p class="rounded-xl border border-green-200 bg-green-50 px-5 py-4 text-sm font-semibold text-green-800" role="status">
+                You have been logged out successfully.
+            </p>
+        </div>
+    <% } %>
+
+    <!-- Hero -->
+    <section class="px-6 py-16 md:py-24">
+        <div class="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
+
+            <div>
+                <p class="mb-5 text-sm font-bold uppercase tracking-[4px] text-[#d96c36]">
+                    Your Reading Corner
+                </p>
+
+                <h1 class="text-5xl font-black leading-tight md:text-7xl">
+                    Open a Book.
+                    <span class="block font-serif italic text-[#d96c36]">
+                        Open a World.
+                    </span>
+                </h1>
+
+                <p class="mt-6 max-w-lg leading-8 text-[#777168]">
+                    Find stories that inspire you, ideas that change you,
+                    and adventures that stay with you forever.
+                </p>
+
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a href="/books"
+                       class="rounded-md bg-[#d96c36] px-7 py-3.5 font-semibold text-white hover:bg-[#b95024]">
+                        Explore Books →
+                    </a>
+
+                    <a href="/categories"
+                       class="rounded-md border border-[#d8cfc0] px-7 py-3.5 font-semibold hover:bg-white">
+                        Browse Categories
+                    </a>
+                </div>
+
+                <div class="mt-10 flex gap-8 border-t border-[#e5ded2] pt-6">
+                    <div>
+                        <h3 class="text-2xl font-bold">Stories</h3>
+                        <p class="text-sm text-[#777168]">For every reader</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold">Ideas</h3>
+                        <p class="text-sm text-[#777168]">For curious minds</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative mx-auto w-full max-w-sm">
+                <div class="absolute -right-3 -top-3 h-full w-full rounded-2xl bg-[#e9b98b]"></div>
+
+                <div class="feature-cover-frame relative p-3 shadow-xl">
+                    <img src="/uploads/sorcery.jpg"
+                         alt="Featured book"
+                         class="feature-cover-image rounded-xl"
+                         onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+
+                    <div class="book-cover-fallback rounded-xl" hidden aria-hidden="true">
+                        <span class="text-5xl">📚</span>
+                        <span class="text-sm">Featured book cover</span>
+                    </div>
+
+                    <div class="absolute inset-x-6 bottom-6 rounded-lg bg-[#faf7f0]/95 px-5 py-4 shadow-lg backdrop-blur">
+                        <p class="text-xs uppercase tracking-widest text-[#d96c36]">
+                            Today's Inspiration
+                        </p>
+                        <p class="mt-1 font-bold">Your next favourite read</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="bg-white px-6 py-16">
+        <div class="mx-auto max-w-6xl">
+
+            <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
+                <div>
+                    <p class="font-bold uppercase tracking-[3px] text-[#d96c36]">
+                        Find Your Interest
+                    </p>
+                    <h2 class="mt-3 text-3xl font-black md:text-4xl">
+                        Explore Categories
+                    </h2>
+                </div>
+
+                <a href="/categories"
+                   class="font-semibold text-[#d96c36] hover:underline">
+                    View All →
+                </a>
+            </div>
+
+            <div class="grid gap-5 md:grid-cols-3">
+
+                <a href="/categories/Self Helps"
+                   class="rounded-xl border border-[#eee5d8] bg-[#faf7f0] p-7 transition hover:-translate-y-1 hover:shadow-lg">
+                    <span class="text-3xl">🌱</span>
+                    <h3 class="mt-5 text-xl font-bold">Self Help</h3>
+                    <p class="mt-3 text-sm leading-7 text-[#777168]">
+                        Build better habits, discover your potential
+                        and grow into your best self.
+                    </p>
+                    <p class="mt-5 font-semibold text-[#d96c36]">Explore Books →</p>
+                </a>
+
+                <a href="/categories/Magic Systems"
+                   class="rounded-xl border border-[#eee5d8] bg-[#faf7f0] p-7 transition hover:-translate-y-1 hover:shadow-lg">
+                    <span class="text-3xl">🔮</span>
+                    <h3 class="mt-5 text-xl font-bold">Magic Systems</h3>
+                    <p class="mt-3 text-sm leading-7 text-[#777168]">
+                        Discover magical worlds, ancient mysteries
+                        and unforgettable adventures.
+                    </p>
+                    <p class="mt-5 font-semibold text-[#d96c36]">Explore Books →</p>
+                </a>
+
+                <a href="/categories/Pscyological Thriller"
+                   class="rounded-xl border border-[#eee5d8] bg-[#faf7f0] p-7 transition hover:-translate-y-1 hover:shadow-lg">
+                    <span class="text-3xl">🕵️</span>
+                    <h3 class="mt-5 text-xl font-bold">Psychological Thriller</h3>
+                    <p class="mt-3 text-sm leading-7 text-[#777168]">
+                        Uncover hidden secrets, unexpected twists
+                        and mind-bending mysteries.
+                    </p>
+                    <p class="mt-5 font-semibold text-[#d96c36]">Explore Books →</p>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="px-6 py-16 md:py-20">
+        <div class="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2">
+
+            <img src="/uploads/image_25fd36f1.jpg"
+                 alt="Our bookstore"
+                 class="editorial-image rounded-xl shadow-lg">
+
+            <div>
+                <p class="font-bold uppercase tracking-[3px] text-[#d96c36]">
+                    A Little About Us
+                </p>
+
+                <h2 class="mt-4 text-4xl font-black leading-tight md:text-5xl">
+                    Every Book Has
+                    <span class="font-serif italic text-[#d96c36]">
+                        a Story to Tell.
+                    </span>
+                </h2>
+
+                <p class="mt-5 leading-8 text-[#777168]">
+                    Bookholic brings together stories, knowledge
+                    and imagination for readers of every kind.
+                    Whether you want to learn something new or escape
+                    into another world, your next read is waiting here.
+                </p>
+
+                <a href="/about"
+                   class="mt-7 inline-block border-b-2 border-[#d96c36] pb-1 font-bold hover:text-[#d96c36]">
+                    Discover Our Story →
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="bg-[#eee5d8] px-6 py-16">
+        <div class="mx-auto max-w-6xl">
+
+            <div class="mb-10 text-center">
+                <p class="font-bold uppercase tracking-[3px] text-[#d96c36]">
+                    The Bookholic Difference
+                </p>
+                <h2 class="mt-3 text-3xl font-black md:text-4xl">
+                    More Than Just Books
+                </h2>
+            </div>
+
+            <div class="grid gap-8 text-center md:grid-cols-3">
+
+                <div class="p-5">
+                    <div class="text-4xl">📖</div>
+                    <h3 class="mt-4 text-xl font-bold">Great Stories</h3>
+                    <p class="mt-3 leading-7 text-[#777168]">
+                        Discover memorable stories and carefully
+                        selected reading experiences.
+                    </p>
+                </div>
+
+                <div class="p-5">
+                    <div class="text-4xl">💡</div>
+                    <h3 class="mt-4 text-xl font-bold">Fresh Ideas</h3>
+                    <p class="mt-3 leading-7 text-[#777168]">
+                        Explore new perspectives, gain knowledge
+                        and keep your curiosity alive.
+                    </p>
+                </div>
+
+                <div class="p-5">
+                    <div class="text-4xl">❤️</div>
+                    <h3 class="mt-4 text-xl font-bold">Made for Readers</h3>
+                    <p class="mt-3 leading-7 text-[#777168]">
+                        Find something special, whether you read
+                        every day or just getting started.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section class="px-6 py-16">
+        <div class="mx-auto max-w-6xl rounded-2xl bg-[#302820] px-6 py-14 text-center text-white md:px-16">
+
+            <p class="font-bold uppercase tracking-[3px] text-[#f2a16f]">
+                Turn the Next Page
+            </p>
+
+            <h2 class="mx-auto mt-4 max-w-2xl text-3xl font-black md:text-5xl">
+                Your Next Favourite Book Is Waiting.
+            </h2>
+
+            <p class="mx-auto mt-5 max-w-xl leading-7 text-white/65">
+                Start exploring and find a story worth remembering.
+            </p>
+
+            <a href="/books"
+               class="mt-8 inline-block rounded-md bg-[#e77c45] px-8 py-3.5 font-bold text-white hover:bg-[#d96c36]">
+                Discover Books →
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#e5ded2] bg-white px-6 py-8 text-center">
+
+        <h3 class="text-2xl font-black">
+            <span class="font-serif italic text-[#d96c36]">Bookholic</span>
+        </h3>
+
+        <p class="mx-auto mt-3 max-w-md text-sm leading-6 text-[#777168]">
+            A little place for big imaginations, great stories
+            and curious minds.
+        </p>
+
+        <div class="mx-auto my-6 max-w-6xl border-t border-[#eee5d8]"></div>
+
+        <p class="text-sm text-[#777168]">
+            Read. Discover. Repeat. © Bookholic
+        </p>
+
+    </footer>
+
+</body>
+</html>

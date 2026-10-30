@@ -1,0 +1,260 @@
+:root {
+    color-scheme: light;
+    --store-ink: #292522;
+    --store-ink-soft: #49413d;
+    --store-accent: #8b3f46;
+    --store-accent-dark: #713239;
+    --store-highlight: #f0dedd;
+    --store-paper: #faf8f5;
+    --store-paper-deep: #f0ece7;
+    --store-line: #e5ded8;
+    --store-muted: #756c67;
+}
+
+body.store-ui {
+    min-height: 100vh;
+    background: var(--store-paper) !important;
+    color: #302b28 !important;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body.store-ui::selection {
+    background: var(--store-highlight);
+    color: var(--store-ink);
+}
+
+.store-ui nav.store-nav {
+    border-color: var(--store-line) !important;
+    background-color: rgb(255 255 255 / 96%) !important;
+    box-shadow: 0 8px 28px rgb(41 37 36 / 7%) !important;
+}
+
+.store-ui nav > div:first-child {
+    min-height: 3rem;
+}
+
+.store-ui nav a {
+    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.store-ui nav a:hover {
+    color: var(--store-accent-dark);
+}
+
+.store-ui nav > div:first-child > a:first-child > span:first-child {
+    border-radius: 1rem !important;
+    box-shadow: 0 8px 20px rgb(41 37 36 / 14%);
+}
+
+.store-ui main {
+    scroll-margin-top: 6rem;
+}
+
+.store-ui [class*="border-[#e8dfd2]"],
+.store-ui [class*="border-[#e5ded2]"],
+.store-ui [class*="border-[#e9ddd1]"],
+.store-ui [class*="border-[#e4e1f5]"],
+.store-ui [class*="border-[#e1d5ca]"],
+.store-ui [class*="border-[#dcd8f1]"] {
+    border-color: var(--store-line) !important;
+}
+
+.store-ui [class*="bg-[#302820]"],
+.store-ui [class*="bg-[#171334]"],
+.store-ui [class*="bg-[#24313d]"] {
+    background-color: var(--store-ink) !important;
+}
+
+.store-ui [class*="bg-[#d96c36]"],
+.store-ui [class*="bg-[#e77c45]"],
+.store-ui [class*="bg-[#cf7a4f]"],
+.store-ui [class*="bg-[#a78bfa]"] {
+    background-color: var(--store-accent) !important;
+}
+
+.store-ui [class*="hover:bg-[#d96c36]"]:hover,
+.store-ui [class*="hover:bg-[#b95024]"]:hover,
+.store-ui [class*="hover:bg-[#cf7a4f]"]:hover,
+.store-ui [class*="hover:bg-[#a78bfa]"]:hover {
+    background-color: var(--store-accent-dark) !important;
+}
+
+.store-ui [class*="hover:text-[#b95024]"]:hover,
+.store-ui [class*="hover:text-[#d96c36]"]:hover,
+.store-ui [class*="hover:text-[#24313d]"]:hover {
+    color: var(--store-accent-dark) !important;
+}
+
+.store-ui [class*="bg-[#eee5d8]"],
+.store-ui [class*="bg-[#eee3d2]"],
+.store-ui [class*="bg-[#f2ede4]"],
+.store-ui [class*="bg-[#fdfaf5]"],
+.store-ui [class*="bg-[#fbfaff]"],
+.store-ui [class*="bg-[#faf0e5]"] {
+    background-color: var(--store-paper-deep) !important;
+}
+
+.store-ui [class*="bg-[#faf7f0]"],
+.store-ui [class*="bg-[#faf7f2]"],
+.store-ui [class*="bg-[#f7f7ff]"] {
+    background-color: var(--store-paper) !important;
+}
+
+.store-ui [class*="text-[#d96c36]"],
+.store-ui [class*="text-[#b95024]"],
+.store-ui [class*="text-[#a6573d]"],
+.store-ui [class*="text-[#0f9f9a]"],
+.store-ui [class*="text-[#a78bfa]"],
+.store-ui [class*="text-[#a07859]"] {
+    color: var(--store-accent-dark) !important;
+}
+
+.store-ui [class*="text-[#f2a16f]"],
+.store-ui [class*="text-[#cf7a4f]"] {
+    color: var(--store-highlight) !important;
+}
+
+.store-ui [class*="text-[#29251f]"],
+.store-ui [class*="text-[#24313d]"],
+.store-ui [class*="text-[#1e1b4b]"] {
+    color: #302b28 !important;
+}
+
+.store-ui [class*="rounded-xl"][class*="border"],
+.store-ui [class*="rounded-2xl"][class*="border"] {
+    box-shadow: 0 12px 32px rgb(41 37 36 / 5%);
+}
+
+.store-ui button,
+.store-ui input,
+.store-ui textarea,
+.store-ui select {
+    font: inherit;
+}
+
+.store-ui button {
+    cursor: pointer;
+    transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.store-ui button:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.store-ui input,
+.store-ui textarea,
+.store-ui select {
+    border-radius: 0.75rem;
+}
+
+.store-ui input:focus,
+.store-ui textarea:focus,
+.store-ui select:focus {
+    border-color: var(--store-accent) !important;
+    outline: 3px solid rgb(139 63 70 / 18%);
+    outline-offset: 1px;
+}
+
+.store-ui a:focus-visible,
+.store-ui button:focus-visible {
+    outline: 3px solid var(--store-highlight);
+    outline-offset: 3px;
+}
+
+.store-ui img {
+    max-width: 100%;
+}
+
+.store-ui .book-cover-frame {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(145deg, #f5f0eb, #ebe4df);
+}
+
+.store-ui .book-cover-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0.875rem;
+    object-fit: contain;
+    transition: transform 500ms ease;
+}
+
+.store-ui .group:hover .book-cover-image {
+    transform: scale(1.04);
+}
+
+.store-ui .book-cover-fallback {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 0.75rem;
+    color: var(--store-muted);
+}
+
+.store-ui .feature-cover-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: linear-gradient(145deg, #f5f0eb, #e9e1dc);
+}
+
+.store-ui .feature-cover-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 1.25rem 1.25rem 5rem;
+    object-fit: contain;
+}
+
+.store-ui .editorial-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background: linear-gradient(145deg, #f5f0eb, #e9e1dc);
+    object-fit: contain;
+    object-position: center;
+}
+
+.store-ui .cart-cover {
+    display: block;
+    width: 5rem;
+    height: 6.5rem;
+    flex: none;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+    background: var(--store-paper-deep);
+    object-fit: contain;
+}
+
+.store-ui .admin-cover-preview {
+    display: block;
+    width: 9rem;
+    height: 12rem;
+    margin-inline: auto;
+    border-radius: 0.75rem;
+    background: var(--store-paper-deep);
+    object-fit: contain;
+}
+
+.store-ui footer {
+    background-color: var(--store-ink) !important;
+    color: white;
+}
+
+.store-ui footer a {
+    color: var(--store-highlight);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .store-ui *,
+    .store-ui *::before,
+    .store-ui *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

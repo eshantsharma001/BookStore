@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact | Bookholic</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/storefront.css">
+
+</head>
+
+<body class="store-ui min-h-screen bg-[#f7f7ff] text-[#1e1b4b] antialiased">
+
+    <%- include('includes/nav.ejs') %>
+
+    <section class="bg-[#171334] px-6 py-20 text-center text-white">
+
+        <p class="text-sm font-bold uppercase tracking-[4px] text-[#a78bfa]">
+            Bookholic
+        </p>
+
+        <h1 class="mt-3 text-4xl font-bold md:text-5xl">
+            Let's Talk About
+            <span class="font-serif italic text-[#a78bfa]">
+                Books.
+            </span>
+        </h1>
+
+        <p class="mx-auto mt-4 max-w-xl text-white/55">
+            Have a question or need help? We'd love to hear from you.
+        </p>
+
+    </section>
+
+
+    <main class="mx-auto max-w-4xl px-6 py-14">
+
+        <div class="relative overflow-hidden rounded-[1.75rem] border border-[#e4e1f5] bg-white shadow-2xl shadow-violet-950/10">
+
+            <div class="h-1.5 bg-[#a78bfa]"></div>
+
+            <div class="p-8 md:p-10">
+
+                <div class="mb-8">
+
+                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#1e1b4b] text-2xl text-[#a78bfa] shadow-md">
+                        ✉️
+                    </div>
+
+                    <p class="mt-6 text-xs font-bold uppercase tracking-[4px] text-[#0f9f9a]">
+                        Get In Touch
+                    </p>
+
+                    <h2 class="mt-2 text-3xl font-bold text-[#1e1b4b]">
+                        Send us a Message
+                    </h2>
+
+                    <p class="mt-2 text-sm leading-6 text-gray-500">
+                        Fill in the details below and we'll get back to you.
+                    </p>
+
+                </div>
+
+
+                <% if (contactStatus === 'sent') { %>
+                    <p class="mb-5 rounded-xl border border-green-200 bg-green-50 p-4 text-sm font-semibold text-green-800" role="status">
+                        Your message was sent successfully. Thank you for contacting us.
+                    </p>
+                <% } else if (contactStatus === 'failed') { %>
+                    <p class="mb-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700" role="alert">
+                        We could not send your message right now. Please try again shortly.
+                    </p>
+                <% } else if (contactStatus === 'unavailable') { %>
+                    <p class="mb-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm font-semibold text-amber-800" role="alert">
+                        Contact email is not configured yet. Please try again later.
+                    </p>
+                <% } else if (contactStatus === 'invalid') { %>
+                    <p class="mb-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm font-semibold text-amber-800" role="alert">
+                        Please check your details and try sending your message again.
+                    </p>
+                <% } %>
+
+                <form id="contactForm" action="/contact" method="post" class="space-y-5">
+
+                    <div class="grid gap-5 sm:grid-cols-2">
+
+                        <div>
+
+                            <label for="contactName" class="mb-2 block text-sm font-semibold text-[#1e1b4b]">
+                                Your Name
+                            </label>
+
+                            <input
+                                id="contactName"
+                                type="text"
+                                name="name"
+                                placeholder="Enter your name"
+                                required
+                                class="w-full rounded-xl border border-[#dcd8f1] bg-[#fbfaff] px-4 py-3 text-sm text-[#1e1b4b] outline-none transition duration-300 placeholder:text-gray-400 focus:border-[#a78bfa] focus:bg-white focus:ring-4 focus:ring-[#a78bfa]/10"
+                            >
+
+                        </div>
+
+
+                        <div>
+
+                            <label for="contactPhone" class="mb-2 block text-sm font-semibold text-[#1e1b4b]">
+                                Phone Number
+                            </label>
+
+                            <input
+                                id="contactPhone"
+                                type="tel"
+                                name="mobile"
+                                placeholder="Enter your phone number"
+                                required
+                                class="w-full rounded-xl border border-[#dcd8f1] bg-[#fbfaff] px-4 py-3 text-sm text-[#1e1b4b] outline-none transition duration-300 placeholder:text-gray-400 focus:border-[#a78bfa] focus:bg-white focus:ring-4 focus:ring-[#a78bfa]/10"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="contactEmail" class="mb-2 block text-sm font-semibold text-[#1e1b4b]">
+                            Email Address
+                        </label>
+
+                        <input
+                            id="contactEmail"
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            required
+                            class="w-full rounded-xl border border-[#dcd8f1] bg-[#fbfaff] px-4 py-3 text-sm text-[#1e1b4b] outline-none transition duration-300 placeholder:text-gray-400 focus:border-[#a78bfa] focus:bg-white focus:ring-4 focus:ring-[#a78bfa]/10"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="contactMessage" class="mb-2 block text-sm font-semibold text-[#1e1b4b]">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="contactMessage"
+                            name="message"
+                            rows="5"
+                            placeholder="Write your message..."
+                            required
+                            class="w-full resize-none rounded-xl border border-[#dcd8f1] bg-[#fbfaff] px-4 py-3 text-sm text-[#1e1b4b] outline-none transition duration-300 placeholder:text-gray-400 focus:border-[#a78bfa] focus:bg-white focus:ring-4 focus:ring-[#a78bfa]/10"
+                        ></textarea>
+
+                    </div>
+
+                    <p id="contactFeedback" class="hidden rounded-xl p-4 text-sm font-semibold" role="status" aria-live="polite"></p>
+
+                    <button
+                        id="contactSubmit"
+                        type="submit"
+                        class="w-full rounded-xl bg-[#171334] px-6 py-3.5 font-bold text-white shadow-md shadow-violet-950/15 transition duration-300 hover:-translate-y-0.5 hover:bg-[#a78bfa] hover:text-[#171334] hover:shadow-xl"
+                    >
+                        Send Your Message →
+                    </button>
+
+                </form>
+
+
+                <div class="mt-8 border-t border-[#ebe9f7] pt-6 text-center">
+
+                    <p class="text-xs text-gray-400">
+                        Bookholic • We'd love to hear from you
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <footer class="bg-[#171334] px-6 py-8 text-center text-white">
+
+        <h3 class="text-lg font-bold">
+            <span class="text-[#a78bfa]">Bookholic</span>
+        </h3>
+
+        <p class="mt-2 text-sm text-white/40">
+            Read. Learn. Grow. © Bookholic
+        </p>
+
+    </footer>
+
+    <script>
+        const contactForm = document.getElementById('contactForm');
+        const contactSubmit = document.getElementById('contactSubmit');
+        const contactFeedback = document.getElementById('contactFeedback');
+        const defaultSubmitText = contactSubmit.textContent.trim();
+
+        contactForm.addEventListener('submit', async event => {
+            event.preventDefault();
+            contactSubmit.disabled = true;
+            contactSubmit.textContent = 'Sending...';
+            contactFeedback.className = 'rounded-xl bg-[#eee9df] p-4 text-sm font-semibold text-[#282b27]';
+            contactFeedback.textContent = 'Sending your message...';
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(Object.fromEntries(new FormData(contactForm)))
+                });
+                const result = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'We could not send your message. Please try again shortly.');
+                }
+
+                contactFeedback.className = 'rounded-xl border border-green-200 bg-green-50 p-4 text-sm font-semibold text-green-800';
+                contactFeedback.textContent = result.message;
+                contactForm.reset();
+            } catch (error) {
+                contactFeedback.className = 'rounded-xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-700';
+                contactFeedback.textContent = error.message || 'We could not send your message. Please check your connection and try again.';
+            } finally {
+                contactSubmit.disabled = false;
+                contactSubmit.textContent = defaultSubmitText;
+            }
+        });
+    </script>
+
+</body>
+
+</html>

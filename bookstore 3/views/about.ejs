@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | Bookholic</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/storefront.css">
+</head>
+
+<body class="store-ui min-h-screen bg-[#faf7f0] text-[#29251f] antialiased">
+
+    <%- include('includes/nav.ejs') %>
+
+    <!-- Hero -->
+    <section class="bg-[#302820] px-6 py-16 text-white md:py-24">
+
+        <div class="mx-auto max-w-4xl text-center">
+
+            <p class="text-sm font-bold uppercase tracking-[4px] text-[#f2a16f]">
+                The Story Behind Our Store
+            </p>
+
+            <h1 class="mt-5 text-4xl font-black leading-tight md:text-6xl">
+                Books Bring Us
+                <span class="block font-serif italic text-[#f2a16f]">
+                    Closer to the World.
+                </span>
+            </h1>
+
+            <p class="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/65">
+                We believe every book has the power to inspire a new idea,
+                open a new door and take you somewhere unexpected.
+                Welcome to our little corner of stories.
+            </p>
+
+            <a href="/books"
+               class="mt-8 inline-block rounded-md bg-[#e77c45] px-7 py-3.5 font-bold text-white transition hover:bg-[#d96c36]">
+                Explore Our Books →
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- Our Story -->
+    <main class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+
+        <section class="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+
+            <div class="relative">
+
+                <div class="absolute -bottom-3 -right-3 h-full w-full rounded-xl bg-[#e9c6a5]"></div>
+
+                <img
+                    src="/uploads/ole.jpg"
+                    alt="A welcoming bookstore"
+                    class="editorial-image relative rounded-xl shadow-lg"
+                >
+
+            </div>
+
+            <div>
+
+                <p class="text-sm font-bold uppercase tracking-[3px] text-[#d96c36]">
+                    Our Story
+                </p>
+
+                <h2 class="mt-4 text-3xl font-black leading-tight md:text-5xl">
+                    A Place for
+                    <span class="font-serif italic text-[#d96c36]">
+                        Every Reader.
+                    </span>
+                </h2>
+
+                <p class="mt-6 leading-8 text-[#777168]">
+                    Bookholic was created for people who believe
+                    that a good book can make an ordinary day special.
+                    Our collection brings together stories, knowledge
+                    and ideas for readers from every walk of life.
+                </p>
+
+                <p class="mt-4 leading-8 text-[#777168]">
+                    From personal growth and practical learning to
+                    magical worlds and thrilling mysteries, we want
+                    to make discovering your next favourite book simple
+                    and enjoyable.
+                </p>
+
+                <div class="mt-7 flex flex-wrap gap-3">
+
+                    <span class="rounded-md bg-[#eee5d8] px-4 py-2.5 text-sm font-semibold text-[#554536]">
+                        📚 Books for Everyone
+                    </span>
+
+                    <span class="rounded-md bg-[#faf0e5] px-4 py-2.5 text-sm font-semibold text-[#b95024]">
+                        ✦ Stories That Inspire
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Mission -->
+        <section class="mt-24 grid gap-8 md:grid-cols-2">
+
+            <div class="rounded-xl bg-[#eee5d8] p-8 md:p-10">
+
+                <span class="text-3xl">🎯</span>
+
+                <p class="mt-5 text-sm font-bold uppercase tracking-[3px] text-[#d96c36]">
+                    Our Mission
+                </p>
+
+                <h3 class="mt-3 text-2xl font-black">
+                    Make Reading Accessible.
+                </h3>
+
+                <p class="mt-4 leading-7 text-[#777168]">
+                    We aim to help readers discover books that match
+                    their interests, encourage curiosity and make
+                    learning a part of everyday life.
+                </p>
+
+            </div>
+
+            <div class="rounded-xl bg-[#302820] p-8 text-white md:p-10">
+
+                <span class="text-3xl">💭</span>
+
+                <p class="mt-5 text-sm font-bold uppercase tracking-[3px] text-[#f2a16f]">
+                    Our Vision
+                </p>
+
+                <h3 class="mt-3 text-2xl font-black">
+                    A World Full of Readers.
+                </h3>
+
+                <p class="mt-4 leading-7 text-white/65">
+                    We want to create a welcoming space where everyone
+                    can explore fresh perspectives, find inspiration
+                    and enjoy the endless possibilities of books.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="py-20">
+
+            <div class="mx-auto mb-12 max-w-2xl text-center">
+
+                <p class="text-sm font-bold uppercase tracking-[3px] text-[#d96c36]">
+                    The Bookholic Difference
+                </p>
+
+                <h2 class="mt-4 text-3xl font-black md:text-4xl">
+                    Why Readers Choose Us
+                </h2>
+
+                <p class="mt-4 leading-7 text-[#777168]">
+                    A simple, welcoming way to discover books,
+                    explore new interests and enjoy reading.
+                </p>
+
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-3">
+
+                <article class="rounded-xl border border-[#e8dfd2] bg-white p-7 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+
+                    <div class="flex h-14 w-14 items-center justify-center rounded-lg bg-[#faf0e5] text-2xl">
+                        📚
+                    </div>
+
+                    <h3 class="mt-5 text-xl font-black">
+                        A Varied Collection
+                    </h3>
+
+                    <p class="mt-3 text-sm leading-7 text-[#777168]">
+                        Explore different genres, from personal
+                        development to imaginative fiction.
+                    </p>
+
+                </article>
+
+                <article class="rounded-xl border border-[#e8dfd2] bg-white p-7 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+
+                    <div class="flex h-14 w-14 items-center justify-center rounded-lg bg-[#faf0e5] text-2xl">
+                        🔎
+                    </div>
+
+                    <h3 class="mt-5 text-xl font-black">
+                        Easy Discovery
+                    </h3>
+
+                    <p class="mt-3 text-sm leading-7 text-[#777168]">
+                        Browse categories and find books that
+                        suit your interests and reading goals.
+                    </p>
+
+                </article>
+
+                <article class="rounded-xl border border-[#e8dfd2] bg-white p-7 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+
+                    <div class="flex h-14 w-14 items-center justify-center rounded-lg bg-[#faf0e5] text-2xl">
+                        ❤️
+                    </div>
+
+                    <h3 class="mt-5 text-xl font-black">
+                        Built for Book Lovers
+                    </h3>
+
+                    <p class="mt-3 text-sm leading-7 text-[#777168]">
+                        Whether you are a new reader or a lifelong
+                        book lover, there is always more to discover.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Quote Section -->
+    <section class="px-6 pb-16">
+
+        <div class="mx-auto max-w-6xl rounded-xl bg-[#eee5d8] px-6 py-12 text-center md:px-16 md:py-16">
+
+            <p class="text-4xl font-serif text-[#d96c36]">“</p>
+
+            <h2 class="mx-auto max-w-3xl font-serif text-3xl font-bold leading-snug md:text-4xl">
+                A book is a journey you can begin anytime.
+            </h2>
+
+            <p class="mt-5 text-sm font-bold uppercase tracking-[3px] text-[#777168]">
+                Our Philosophy
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="px-6 pb-16">
+
+        <div class="mx-auto max-w-6xl rounded-xl bg-[#302820] px-6 py-14 text-center text-white md:px-16">
+
+            <p class="text-sm font-bold uppercase tracking-[3px] text-[#f2a16f]">
+                Your Next Chapter Starts Here
+            </p>
+
+            <h2 class="mx-auto mt-4 max-w-3xl text-3xl font-black md:text-5xl">
+                Find a Story Worth Remembering.
+            </h2>
+
+            <p class="mx-auto mt-5 max-w-xl leading-7 text-white/65">
+                Explore our collection, discover new interests
+                and find your next favourite read.
+            </p>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-4">
+
+                <a href="/books"
+                   class="rounded-md bg-[#e77c45] px-7 py-3.5 font-bold text-white transition hover:bg-[#d96c36]">
+                    Explore Books →
+                </a>
+
+                <a href="/categories"
+                   class="rounded-md border border-white/25 px-7 py-3.5 font-semibold text-white transition hover:bg-white/10">
+                    Browse Categories
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#302820] px-6 py-9 text-center text-white">
+
+        <h3 class="text-xl font-black">
+            <span class="font-serif italic text-[#f2a16f]">Bookholic</span>
+        </h3>
+
+        <p class="mx-auto mt-3 max-w-md text-sm leading-6 text-white/60">
+            A little place for big imaginations, great stories
+            and curious minds.
+        </p>
+
+        <div class="mx-auto my-6 max-w-6xl border-t border-white/15"></div>
+
+        <p class="text-sm text-white/50">
+            Read. Discover. Repeat. © Bookholic
+        </p>
+
+    </footer>
+
+</body>
+</html>

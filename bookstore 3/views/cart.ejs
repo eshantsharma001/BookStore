@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart | Bookholic</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/storefront.css">
+</head>
+
+<body class="store-ui min-h-screen bg-[#faf7f0] text-[#29251f] antialiased">
+
+    <%- include('includes/nav.ejs') %>
+
+    <main class="mx-auto max-w-5xl px-6 py-14">
+        <div class="mb-8">
+            <p class="text-sm font-bold uppercase tracking-[3px] text-[#d96c36]">
+                Your Reading List
+            </p>
+            <h1 class="mt-2 text-4xl font-black">Shopping Cart</h1>
+        </div>
+
+        <div id="emptyCart" class="rounded-xl border border-[#e5ded2] bg-white px-6 py-16 text-center">
+            <p class="text-5xl">📚</p>
+            <h2 class="mt-4 text-2xl font-bold">Your cart is empty</h2>
+            <p class="mt-2 text-[#777168]">Find a book you love and add it to your cart.</p>
+            <a href="/books"
+               class="mt-6 inline-block rounded-md bg-[#302820] px-6 py-3 font-bold text-white hover:bg-[#d96c36]">
+                Browse Books
+            </a>
+        </div>
+
+        <div id="cartContent" class="hidden">
+            <div id="cartItems" class="space-y-4"></div>
+
+            <div class="mt-6 rounded-xl border border-[#e5ded2] bg-white p-5">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <a href="/books" class="font-semibold text-[#d96c36] hover:underline">
+                        ← Continue Shopping
+                    </a>
+                    <div class="text-right">
+                        <p class="font-semibold text-[#777168]">
+                            Total items: <span id="totalItems" class="text-[#29251f]">0</span>
+                        </p>
+                        <p class="mt-1 text-xl font-black">
+                            Total: <span id="cartTotal" class="text-[#d96c36]">₹0</span>
+                        </p>
+                    </div>
+                </div>
+
+                <form id="orderForm" class="mt-6 border-t border-[#e5ded2] pt-6">
+                    <h2 class="text-xl font-bold">Delivery details</h2>
+                    <p class="mt-1 text-sm text-[#777168]">
+                        Payment is Cash on Delivery only. Pay in cash when your books arrive.
+                    </p>
+
+                    <div class="mt-5 grid gap-4 sm:grid-cols-2">
+                        <label class="text-sm font-semibold">
+                            Full name
+                            <input name="customerName" type="text" required maxlength="100" autocomplete="name"
+                                   class="mt-2 w-full rounded-md border border-[#e5ded2] px-3 py-2.5 font-normal">
+                        </label>
+                        <label class="text-sm font-semibold">
+                            Phone number
+                            <input name="phone" type="tel" required maxlength="20" autocomplete="tel"
+                                   class="mt-2 w-full rounded-md border border-[#e5ded2] px-3 py-2.5 font-normal">
+                        </label>
+                        <label class="text-sm font-semibold sm:col-span-2">
+                            Delivery address
+                            <textarea name="address" required maxlength="500" rows="3" autocomplete="street-address"
+                                      class="mt-2 w-full rounded-md border border-[#e5ded2] px-3 py-2.5 font-normal"></textarea>
+                        </label>
+                    </div>
+
+                    <p id="orderMessage" class="mt-4 text-sm" role="status" aria-live="polite"></p>
+                    <button id="placeOrderButton" type="submit"
+                            class="mt-4 w-full rounded-md bg-[#d96c36] px-6 py-3 font-bold text-white hover:bg-[#b95024] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto">
+                        Buy Now — Cash on Delivery
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="orderSuccess" class="mt-6 hidden rounded-xl border border-green-200 bg-green-50 p-5 font-semibold text-green-800"
+             role="status" aria-live="polite"></div>
+    </main>
+
+    <script>
+        function readCart() {
+            try {
+                const savedCart = JSON.parse(localStorage.getItem('bookCart') || '[]');
+                return Array.isArray(savedCart) ? savedCart : [];
+            } catch (error) {
+                console.error('Unable to read cart:', error);
+                return [];
+            }
+        }
+
+        let cart = readCart();
+
+        function saveCart() {
+            localStorage.setItem('bookCart', JSON.stringify(cart));
+            window.dispatchEvent(new Event('cartUpdated'));
+            renderCart();
+        }
+
+        function renderCart() {
+            const itemsContainer = document.getElementById('cartItems');
+            const emptyCart = document.getElementById('emptyCart');
+            const cartContent = document.getElementById('cartContent');
+
+            itemsContainer.replaceChildren();
+            emptyCart.classList.toggle('hidden', cart.length > 0);
+            cartContent.classList.toggle('hidden', cart.length === 0);
+
+            cart.forEach((book, index) => {
+                const quantity = Number(book.quantity) || 1;
+                const price = Number(book.price) || 0;
+                const item = document.createElement('article');
+                item.className = 'flex flex-wrap items-center gap-4 rounded-xl border border-[#e5ded2] bg-white p-4';
+
+                if (book.image) {
+                    const image = document.createElement('img');
+                    image.src = book.image;
+                    image.alt = `${book.title || 'Book'} cover`;
+                    image.className = 'cart-cover';
+                    item.append(image);
+                }
+
+                const details = document.createElement('div');
+                details.className = 'min-w-40 flex-1';
+
+                const title = document.createElement('h2');
+                title.className = 'text-lg font-bold';
+                title.textContent = book.title || 'Untitled book';
+                details.append(title);
+
+                if (book.author) {
+                    const author = document.createElement('p');
+                    author.className = 'mt-1 text-sm text-[#777168]';
+                    author.textContent = `By ${book.author}`;
+                    details.append(author);
+                }
+
+                const priceLabel = document.createElement('p');
+                priceLabel.className = 'mt-2 font-semibold text-[#d96c36]';
+                priceLabel.textContent = `₹${price.toLocaleString('en-IN')} each`;
+                details.append(priceLabel);
+                item.append(details);
+
+                const controls = document.createElement('div');
+                controls.className = 'flex items-center gap-3';
+
+                const decrease = document.createElement('button');
+                decrease.type = 'button';
+                decrease.textContent = '−';
+                decrease.setAttribute('aria-label', `Decrease quantity of ${book.title}`);
+                decrease.disabled = quantity <= 1;
+                decrease.className = 'h-9 w-9 rounded border border-[#e5ded2] text-lg disabled:opacity-40';
+                decrease.addEventListener('click', () => {
+                    cart[index].quantity = quantity - 1;
+                    saveCart();
+                });
+
+                const quantityLabel = document.createElement('span');
+                quantityLabel.className = 'min-w-6 text-center font-semibold';
+                quantityLabel.textContent = quantity;
+
+                const increase = document.createElement('button');
+                increase.type = 'button';
+                increase.textContent = '+';
+                increase.setAttribute('aria-label', `Increase quantity of ${book.title}`);
+                increase.className = 'h-9 w-9 rounded border border-[#e5ded2] text-lg';
+                increase.addEventListener('click', () => {
+                    cart[index].quantity = quantity + 1;
+                    saveCart();
+                });
+
+                controls.append(decrease, quantityLabel, increase);
+
+                const remove = document.createElement('button');
+                remove.type = 'button';
+                remove.textContent = 'Remove';
+                remove.className = 'text-sm font-semibold text-red-600 hover:underline';
+                remove.addEventListener('click', () => {
+                    cart.splice(index, 1);
+                    saveCart();
+                });
+                controls.append(remove);
+                item.append(controls);
+
+                const subtotal = document.createElement('p');
+                subtotal.className = 'w-full text-right font-bold sm:w-auto';
+                subtotal.textContent = `₹${(price * quantity).toLocaleString('en-IN')}`;
+                item.append(subtotal);
+
+                itemsContainer.append(item);
+            });
+
+            const total = cart.reduce((sum, book) => {
+                return sum + (Number(book.price) || 0) * (Number(book.quantity) || 1);
+            }, 0);
+            const totalItems = cart.reduce((sum, book) => sum + (Number(book.quantity) || 1), 0);
+            document.getElementById('totalItems').textContent = totalItems;
+            document.getElementById('cartTotal').textContent = `₹${total.toLocaleString('en-IN')}`;
+        }
+
+        document.getElementById('orderForm').addEventListener('submit', async event => {
+            event.preventDefault();
+
+            const form = event.currentTarget;
+            const submitButton = document.getElementById('placeOrderButton');
+            const message = document.getElementById('orderMessage');
+            const formData = new FormData(form);
+            const order = {
+                customerName: formData.get('customerName'),
+                phone: formData.get('phone'),
+                address: formData.get('address'),
+                items: cart.map(book => ({
+                    id: book.id,
+                    quantity: Number(book.quantity) || 1
+                }))
+            };
+
+            submitButton.disabled = true;
+            message.className = 'mt-4 text-sm text-[#777168]';
+            message.textContent = 'Placing your order...';
+
+            try {
+                const response = await fetch('/orders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(order)
+                });
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Unable to place your order. Please try again.');
+                }
+
+                cart = [];
+                localStorage.removeItem('bookCart');
+                window.dispatchEvent(new Event('cartUpdated'));
+                renderCart();
+                const success = document.getElementById('orderSuccess');
+                success.textContent = `${result.message} Order number: ${result.orderId}.`;
+                success.classList.remove('hidden');
+                form.reset();
+            } catch (error) {
+                message.className = 'mt-4 text-sm font-semibold text-red-600';
+                message.textContent = error.message || 'Unable to place your order. Please try again.';
+            } finally {
+                submitButton.disabled = false;
+            }
+        });
+
+        renderCart();
+    </script>
+
+</body>
+</html>

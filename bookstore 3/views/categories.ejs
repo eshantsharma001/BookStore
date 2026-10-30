@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Categories | Bookholic</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/storefront.css">
+</head>
+
+<body class="store-ui min-h-screen bg-[#faf7f0] text-[#29251f] antialiased">
+
+    <%- include('includes/nav.ejs') %>
+
+    <!-- Hero -->
+    <section class="bg-[#302820] px-6 py-16 text-center text-white md:py-20">
+
+        <p class="text-sm font-bold uppercase tracking-[4px] text-[#f2a16f]">
+            Discover Your Interest
+        </p>
+
+        <h1 class="mt-4 text-4xl font-black md:text-6xl">
+            Explore Book
+            <span class="block font-serif italic text-[#f2a16f]">
+                Categories
+            </span>
+        </h1>
+
+        <p class="mx-auto mt-5 max-w-xl leading-7 text-white/65">
+            From personal growth to magical adventures,
+            discover a collection made for curious minds.
+        </p>
+
+        <a href="#collection"
+           class="mt-7 inline-block rounded-md bg-[#e77c45] px-7 py-3 font-bold text-white transition hover:bg-[#d96c36]">
+            Explore Collection ↓
+        </a>
+
+    </section>
+
+    <!-- Category Filters -->
+    <main class="mx-auto max-w-6xl px-6 py-14">
+
+        <section class="mb-14">
+
+            <p class="text-center text-sm font-bold uppercase tracking-[3px] text-[#d96c36]">
+                Find Your Next Read
+            </p>
+
+            <h2 class="mt-3 text-center text-3xl font-black">
+                Browse By Category
+            </h2>
+
+            <div class="mt-7 flex flex-wrap justify-center gap-3">
+
+                <a href="/categories"
+                   class="rounded-md bg-[#302820] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#d96c36]">
+                    All Books
+                </a>
+
+                <% categories.forEach(category => { %>
+
+                    <a href="/categories/<%= category %>"
+                       class="rounded-md border border-[#e5ded2] bg-white px-5 py-3 text-sm font-semibold transition hover:border-[#d96c36] hover:bg-[#faf0e5] hover:text-[#b95024]">
+
+                        <%= category %>
+
+                    </a>
+
+                <% }) %>
+
+            </div>
+
+        </section>
+
+        <!-- Collection Heading -->
+        <section id="collection">
+
+            <div class="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-[#e5ded2] pb-5">
+
+                <div>
+                    <p class="text-sm font-bold uppercase tracking-[3px] text-[#d96c36]">
+                        Handpicked For You
+                    </p>
+
+                    <h2 class="mt-2 text-3xl font-black md:text-4xl">
+                        Books For You
+                    </h2>
+                </div>
+
+                <a href="/books"
+                   class="font-semibold text-[#d96c36] hover:underline">
+                    View All Books →
+                </a>
+
+            </div>
+
+            <!-- Book Grid -->
+            <div class="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+
+                <% books.forEach(book => { %>
+
+                    <article class="group flex flex-col overflow-hidden rounded-xl border border-[#e8dfd2] bg-white transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+                        <!-- Book Image -->
+                        <div class="book-cover-frame m-3 mb-0 overflow-hidden rounded-lg">
+
+                            <% if(book.image || book.imageUrl) { %>
+
+                                <img
+                                    src="<%= book.image || book.imageUrl %>"
+                                    alt="<%= book.title %> cover"
+                                    loading="lazy"
+                                    class="book-cover-image"
+                                    onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+
+                                <div class="book-cover-fallback" hidden aria-hidden="true">
+                                    <span class="text-5xl">📚</span>
+                                    <span class="text-sm">Cover unavailable</span>
+                                </div>
+
+                            <% } else { %>
+
+                                <div class="book-cover-fallback">
+                                    <span class="text-5xl">📚</span>
+                                    <p class="mt-3 text-sm text-[#777168]">
+                                        Book Cover
+                                    </p>
+                                </div>
+
+                            <% } %>
+
+                            <span class="absolute right-3 top-3 rounded bg-white px-3 py-1 text-xs font-bold text-[#b95024] shadow">
+                                BOOK
+                            </span>
+
+                        </div>
+
+                        <!-- Details -->
+                        <div class="flex flex-1 flex-col p-5">
+
+                            <span class="mb-3 w-fit rounded-full bg-[#faf0e5] px-3 py-1 text-xs font-bold text-[#b95024]">
+                                <%= book.category %>
+                            </span>
+
+                            <h3 class="line-clamp-2 text-xl font-black leading-7">
+                                <%= book.title %>
+                            </h3>
+
+                            <p class="mt-2 text-sm text-[#777168]">
+                                By <%= book.author %>
+                            </p>
+
+                            <div class="mt-5 flex items-center justify-between border-t border-[#eee5d8] pt-4">
+
+                                <span class="text-sm text-[#777168]">
+                                    Price
+                                </span>
+
+                                <span class="text-2xl font-black text-[#d96c36]">
+                                    ₹<%= book.price %>
+                                </span>
+
+                            </div>
+
+                            <% if (!isAdmin) { %>
+                                <!-- Purchase Actions -->
+                                <div class="mt-5 grid grid-cols-2 gap-3">
+
+                                <button
+                                    type="button"
+                                    class="add-cart-btn rounded-md border border-[#d96c36] px-2 py-3 text-sm font-bold text-[#b95024] transition hover:bg-[#faf0e5]"
+                                    data-id="<%= book._id %>"
+                                    data-title="<%= book.title %>"
+                                    data-price="<%= book.price %>"
+                                    data-image="<%= book.image || book.imageUrl || '' %>"
+                                    data-author="<%= book.author %>">
+
+                                    + Add to Cart
+
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="buy-now-btn rounded-md bg-[#d96c36] px-2 py-3 text-sm font-bold text-white transition hover:bg-[#b95024]"
+                                    data-id="<%= book._id %>"
+                                    data-title="<%= book.title %>"
+                                    data-price="<%= book.price %>"
+                                    data-image="<%= book.image || book.imageUrl || '' %>"
+                                    data-author="<%= book.author %>">
+                                    Buy Now →
+                                </button>
+
+                                </div>
+                            <% } %>
+
+                        </div>
+
+                    </article>
+
+                <% }) %>
+
+            </div>
+
+            <!-- Empty Collection -->
+            <% if(books.length === 0) { %>
+
+                <div class="py-16 text-center">
+
+                    <p class="text-5xl">📚</p>
+
+                    <h3 class="mt-4 text-2xl font-black">
+                        No Books Found
+                    </h3>
+
+                    <p class="mt-2 text-[#777168]">
+                        Try another category to discover more books.
+                    </p>
+
+                    <a href="/categories"
+                       class="mt-5 inline-block rounded-md bg-[#302820] px-6 py-3 font-bold text-white hover:bg-[#d96c36]">
+                        Browse All Categories
+                    </a>
+
+                </div>
+
+            <% } %>
+
+        </section>
+
+    </main>
+
+    <!-- Bottom CTA -->
+    <section class="px-6 pb-16">
+
+        <div class="mx-auto max-w-6xl rounded-xl bg-[#eee5d8] px-6 py-12 text-center md:px-12">
+
+            <p class="text-sm font-bold uppercase tracking-[3px] text-[#d96c36]">
+                Your Next Chapter
+            </p>
+
+            <h2 class="mt-4 text-3xl font-black md:text-4xl">
+                Every Genre Opens a New World.
+            </h2>
+
+            <p class="mx-auto mt-4 max-w-xl leading-7 text-[#777168]">
+                Discover new ideas, follow exciting adventures,
+                and find the perfect book for your reading list.
+            </p>
+
+            <a href="/books"
+               class="mt-7 inline-block rounded-md bg-[#302820] px-7 py-3 font-bold text-white transition hover:bg-[#d96c36]">
+                View All Books →
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#302820] px-6 py-8 text-center text-white">
+
+        <h3 class="text-xl font-black">
+            <span class="font-serif italic text-[#f2a16f]">Bookholic</span>
+        </h3>
+
+        <p class="mt-3 text-sm text-white/60">
+            Read. Discover. Repeat. © Bookholic
+        </p>
+
+    </footer>
+
+    <!-- Add to Cart Logic -->
+    <script>
+        function getCart() {
+            try {
+                const cart = JSON.parse(localStorage.getItem('bookCart'));
+                return Array.isArray(cart) ? cart : [];
+            } catch (error) {
+                console.error('Unable to read cart:', error);
+                return [];
+            }
+        }
+
+        document.querySelectorAll('.add-cart-btn').forEach(button => {
+
+            button.addEventListener('click', () => {
+
+                const book = {
+                    id: button.dataset.id,
+                    title: button.dataset.title,
+                    price: Number(button.dataset.price),
+                    image: button.dataset.image,
+                    author: button.dataset.author,
+                    quantity: 1
+                };
+
+                const cart = getCart();
+
+                const existingBook = cart.find(item => {
+                    return String(item.id) === String(book.id);
+                });
+
+                if (existingBook) {
+                    existingBook.quantity = (Number(existingBook.quantity) || 0) + 1;
+                } else {
+                    cart.push(book);
+                }
+
+                localStorage.setItem('bookCart', JSON.stringify(cart));
+                window.dispatchEvent(new Event('cartUpdated'));
+
+                const originalText = button.textContent.trim();
+
+                button.textContent = '✓ Added!';
+                button.classList.add('bg-green-50', 'text-green-700');
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('bg-green-50', 'text-green-700');
+                }, 1200);
+
+            });
+
+        });
+
+        document.querySelectorAll('.buy-now-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const book = {
+                    id: button.dataset.id,
+                    title: button.dataset.title,
+                    price: Number(button.dataset.price),
+                    image: button.dataset.image,
+                    author: button.dataset.author,
+                    quantity: 1
+                };
+                const cart = getCart();
+                const existingBook = cart.find(item => String(item.id) === String(book.id));
+
+                if (existingBook) {
+                    existingBook.quantity = (Number(existingBook.quantity) || 0) + 1;
+                } else {
+                    cart.push(book);
+                }
+
+                localStorage.setItem('bookCart', JSON.stringify(cart));
+                window.dispatchEvent(new Event('cartUpdated'));
+                window.location.assign('/cart');
+            });
+        });
+
+    </script>
+
+</body>
+</html>

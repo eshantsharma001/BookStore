@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/storefront.css">
+
+    <title>Edit Book</title>
+
+</head>
+
+<body class="store-ui min-h-screen bg-[#faf7f2] text-[#24313d] antialiased">
+
+    <%- include('includes/nav.ejs') %>
+
+    <main class="relative flex min-h-[calc(100vh-72px)] items-center justify-center overflow-hidden px-6 py-20">
+
+        <div class="absolute -left-32 -top-32 h-80 w-80 rounded-full bg-[#cf7a4f]/10 blur-3xl"></div>
+
+        <div class="absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-[#24313d]/10 blur-3xl"></div>
+
+        <div class="relative w-full max-w-lg">
+
+            <div class="overflow-hidden rounded-[1.75rem] border border-[#e9ddd1] bg-white shadow-2xl shadow-[#24313d]/10">
+
+                <div class="h-1.5 bg-[#cf7a4f]"></div>
+
+                <div class="p-8 md:p-11">
+
+                    <div class="mb-8 text-center">
+
+                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#24313d] text-2xl text-[#cf7a4f] shadow-lg">
+                            ✏️
+                        </div>
+
+                        <p class="mt-6 text-xs font-bold uppercase tracking-[4px] text-[#a6573d]">
+                            Admin Panel
+                        </p>
+
+                        <h1 class="mt-2 text-3xl font-bold text-[#24313d]">
+                            Edit Book
+                        </h1>
+
+                        <p class="mt-2 text-sm leading-6 text-gray-500">
+                            Update the details of your book collection.
+                        </p>
+
+                    </div>
+
+                    <form action="/books/edit/<%= book._id %>" method="POST" enctype="multipart/form-data">
+
+                        <div class="mb-5">
+
+                            <label class="mb-2 block text-sm font-semibold text-[#24313d]">
+                                Title
+                            </label>
+
+                            <input
+                                type="text"
+                                name="title"
+                                value="<%= book.title %>"
+                                class="w-full rounded-xl border border-[#e1d5ca] bg-[#fdfaf5] px-4 py-3 text-sm text-[#24313d] outline-none transition duration-300 placeholder:text-gray-400 focus:border-[#cf7a4f] focus:bg-white focus:ring-4 focus:ring-[#cf7a4f]/10"
+                            >
+
+                        </div>
+
+                        <div class="mb-5">
+
+                            <label class="mb-2 block text-sm font-semibold text-[#24313d]">
+                                Author
+                            </label>
+
+                            <input
+                                type="text"
+                                name="author"
+                                value="<%= book.author %>"
+                                class="w-full rounded-xl border border-[#e1d5ca] bg-[#fdfaf5] px-4 py-3 text-sm text-[#24313d] outline-none transition duration-300 focus:border-[#cf7a4f] focus:bg-white focus:ring-4 focus:ring-[#cf7a4f]/10"
+                            >
+
+                        </div>
+
+                        <div class="mb-5">
+
+                            <label class="mb-2 block text-sm font-semibold text-[#24313d]">
+                                Price
+                            </label>
+
+                            <input
+                                type="number"
+                                name="price"
+                                value="<%= book.price %>"
+                                class="w-full rounded-xl border border-[#e1d5ca] bg-[#fdfaf5] px-4 py-3 text-sm text-[#24313d] outline-none transition duration-300 focus:border-[#cf7a4f] focus:bg-white focus:ring-4 focus:ring-[#cf7a4f]/10"
+                            >
+
+                        </div>
+
+                        <div class="mb-5">
+
+                            <label class="mb-2 block text-sm font-semibold text-[#24313d]">
+                                Category
+                            </label>
+
+                            <input
+                                type="text"
+                                name="category"
+                                value="<%= book.category %>"
+                                class="w-full rounded-xl border border-[#e1d5ca] bg-[#fdfaf5] px-4 py-3 text-sm text-[#24313d] outline-none transition duration-300 focus:border-[#cf7a4f] focus:bg-white focus:ring-4 focus:ring-[#cf7a4f]/10"
+                            >
+
+                        </div>
+
+                        <div class="mb-5">
+
+                            <label class="mb-2 block text-sm font-semibold text-[#24313d]">
+                                Current Image
+                            </label>
+
+                            <div class="relative flex justify-center overflow-hidden rounded-2xl border border-[#e9ddd1] bg-[#fdfaf5] p-4">
+
+                                <img
+                                    src="<%= book.image %>"
+                                    alt="<%= book.title %> current cover"
+                                    class="admin-cover-preview"
+                                    onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
+                                >
+                                <div class="book-cover-fallback" hidden aria-hidden="true">
+                                    <span class="text-4xl">📚</span>
+                                    <span class="text-sm">Cover unavailable</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="mb-7">
+
+                            <label class="mb-2 block text-sm font-semibold text-[#24313d]">
+                                New Image
+                            </label>
+
+                            <input
+                                type="file"
+                                name="img"
+                                class="w-full cursor-pointer rounded-xl border border-[#e1d5ca] bg-[#fdfaf5] p-3 text-sm text-gray-500 outline-none transition duration-300 file:mr-4 file:rounded-lg file:border-0 file:bg-[#24313d] file:px-4 file:py-2 file:font-semibold file:text-white hover:file:bg-[#cf7a4f] hover:file:text-[#24313d] focus:border-[#cf7a4f] focus:ring-4 focus:ring-[#cf7a4f]/10"
+                            >
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="w-full rounded-xl bg-[#24313d] py-3.5 font-bold text-white shadow-md shadow-[#24313d]/15 transition duration-300 hover:-translate-y-0.5 hover:bg-[#cf7a4f] hover:shadow-xl"
+                        >
+                            Update Book →
+                        </button>
+
+                    </form>
+
+                    <div class="mt-7 border-t border-[#eee4db] pt-6 text-center">
+
+                        <p class="text-xs text-gray-400">
+                            Bookholic • Book Management
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="bg-[#24313d] px-6 py-7 text-center text-white">
+
+        <h3 class="text-lg font-bold">
+            <span class="text-[#cf7a4f]">Bookholic</span>
+        </h3>
+
+        <p class="mt-2 text-sm text-white/40">
+            Read. Learn. Grow. © Bookholic
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
